@@ -1,0 +1,6 @@
+[Unit]
+Description=Sync brain to GitHub
+
+[Service]
+Type=oneshot
+ExecStart=/bin/true
