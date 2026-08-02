@@ -14,6 +14,12 @@ This repository is a template for a personal or organizational operating system 
 - safe approval gates
 - reliable automation
 
+## Codespaces bootstrap
+
+Open the repository in GitHub Codespaces and the devcontainer will run `.devcontainer/post-create.sh` automatically during container creation.
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ValoLoco/Universal-Standard-Template)
+
 ## How to use
 
 1. Create a new repository from this template.
@@ -23,6 +29,7 @@ This repository is a template for a personal or organizational operating system 
 
 ## Top-level layout
 
+- `.devcontainer/` - Codespaces bootstrap config
 - `brain/` - the living workspace
 - `templates/` - core operating templates
 - `scripts/` - automation scripts
