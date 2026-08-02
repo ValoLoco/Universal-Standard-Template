@@ -16,7 +16,12 @@ This repository is a template for a personal or organizational operating system 
 
 ## Codespaces bootstrap
 
-Open the repository in GitHub Codespaces and the devcontainer will run `.devcontainer/post-create.sh` automatically during container creation.
+Open the repository in GitHub Codespaces and the devcontainer will:
+1. Install Hermes Agent automatically.
+2. Start the heartbeat loop every 15 minutes.
+3. Scaffold today's status file.
+
+Run `hermes setup` once to connect your model provider.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/ValoLoco/Universal-Standard-Template)
 
@@ -33,6 +38,7 @@ Open the repository in GitHub Codespaces and the devcontainer will run `.devcont
 - `brain/` - the living workspace
 - `templates/` - core operating templates
 - `scripts/` - automation scripts
+- `skills/` - Hermes Agent skills
 - `systemd/` - service and timer files
 
 ## Core files
@@ -43,6 +49,25 @@ Open the repository in GitHub Codespaces and the devcontainer will run `.devcont
 - `templates/Truth-Retention-Policy.md`
 - `templates/Weekly-AAR-Template.md`
 
+## Recommended skills
+
+| Skill | When to use |
+|-------|-------------|
+| `grill-me` | Before any new goal is accepted — human or agent-generated. Forces specificity, measurable outcomes, and failure analysis. |
+| `agent-reach` | When a task falls outside this agent's scope. Decides: handle locally, delegate, escalate, or human-gate. |
+| `plan` | Turn a passed goal into a clean, bite-sized execution plan before writing any code or files. |
+| `hermes-agent-setup` | Configure providers, tools, and gateways. Run this first on a fresh install. |
+
+All skills are in `skills/` and load automatically when Hermes detects they are relevant.
+
+## Heartbeat system
+
+The heartbeat loop (`scripts/start-heartbeat.sh`) runs every 15 minutes and:
+1. Continues any unfinished goal or task.
+2. If all work is done: drafts a new goal, runs `grill-me`, and only creates agents/tasks if the goal passes.
+3. Updates `brain/00-09 SYSTEM/status/MMDDYY-status.md` with cycle progress.
+4. Keeps the Codespace alive via terminal output and file activity.
+
 ## Design rules
 
 - Maximum 2 levels deep for active organization.
@@ -50,3 +75,4 @@ Open the repository in GitHub Codespaces and the devcontainer will run `.devcont
 - Actionability decides placement.
 - Raw evidence stays intact.
 - Human approval gates all external actions.
+- No goal enters the brain without passing `grill-me`.
