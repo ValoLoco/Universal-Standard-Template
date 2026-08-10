@@ -4,34 +4,22 @@ set -euo pipefail
 CONFIG_DIR=".config"
 CONFIG_FILE="$CONFIG_DIR/hermes.yaml"
 
-# Install ollama if not present
-if ! command -v ollama >/dev/null 2>&1; then
-  curl -fsSL https://ollama.com/install.sh | sh
+# Install Hermes Agent (Nous Research)
+if ! command -v hermes >/dev/null 2>&1; then
+  curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 fi
 
-# Start ollama server in background
-ollama serve &
-OLLAMA_PID=$!
-
-# Wait for server to be ready
-sleep 3
-
-# Pull Nous Research Hermes model
-ollama pull nous-hermes2
-
-# Kill background server (Codespaces will manage it separately)
-kill $OLLAMA_PID 2>/dev/null || true
-
-# Scaffold config
+# Scaffold config if not present
 mkdir -p "$CONFIG_DIR"
 
 if [ ! -f "$CONFIG_FILE" ]; then
   cat > "$CONFIG_FILE" <<'EOF'
-backend: ollama
-model: nous-hermes2
-host: http://localhost:11434
+# Hermes Agent config
+# Run: hermes setup --portal
+# to complete OAuth and model setup
 EOF
 fi
 
-echo "Bootstrap complete. Hermes (Nous Research) ready via ollama."
-echo "Run: ollama serve  then  ollama run nous-hermes2"
+echo "Bootstrap complete."
+echo "Hermes Agent installed. Run: hermes setup --portal"
+echo "Add Opencode install steps to this script when confirmed."

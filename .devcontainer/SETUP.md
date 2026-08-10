@@ -5,15 +5,22 @@ Open this repository in GitHub Codespaces. The devcontainer runs `.devcontainer/
 ## What gets installed
 
 - `gh` (GitHub CLI) via devcontainer feature
-- `ollama` for local model inference
-- `nous-hermes2` model pulled automatically via ollama
-- Placeholder config at `.config/hermes.yaml`
+- `hermes` (Hermes Agent by Nous Research)
+
+## First run
+
+After the Codespace starts, complete setup:
+
+```bash
+hermes setup --portal
+```
+
+One OAuth step covers the model and all Tool Gateway tools (web search, image generation, TTS, browser).
 
 ## Running Hermes
 
 ```bash
-ollama serve
-ollama run nous-hermes2
+hermes
 ```
 
 ## Adding Opencode
