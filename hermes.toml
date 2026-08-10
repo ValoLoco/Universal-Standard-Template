@@ -1,0 +1,20 @@
+# hermes.toml — Hermes Agent configuration
+# Place your API key and model settings here.
+# This file is gitignored by default. Do not commit real keys.
+#
+# Reference: https://hermes-agent.nousresearch.com/docs/config
+
+[model]
+# provider = "openai"          # or "anthropic", "nous", etc.
+# model    = "gpt-4o"          # model name
+# api_key  = "sk-..."          # your API key — use env var instead: HERMES_API_KEY
+
+[agent]
+# max_turns = 20               # default turn budget per /goal
+# log_level = "info"           # debug | info | warn | error
+
+[paths]
+# brain   = "brain"            # root of the second brain
+# intake  = "brain/90-99 INTAKE/90.02 Raw"   # drop zone watched by intake agent
+# outbox  = "brain/90-99 INTAKE/90.03 Outbox/pending"  # agent output staging
+# log     = "brain/00-09 SYSTEM/Agent-Log"   # agent action log
