@@ -5,20 +5,20 @@ Open this repository in GitHub Codespaces. The devcontainer runs `.devcontainer/
 ## What gets installed
 
 - `gh` (GitHub CLI) via devcontainer feature
-- Python venv for Hermes at `~/.venvs/hermes`
+- `ollama` for local model inference
+- `nous-hermes2` model pulled automatically via ollama
 - Placeholder config at `.config/hermes.yaml`
+
+## Running Hermes
+
+```bash
+ollama serve
+ollama run nous-hermes2
+```
 
 ## Adding Opencode
 
 Add the confirmed install command for Opencode to `.devcontainer/post-create.sh` when ready.
-
-## Adding Hermes dependencies
-
-Add packages to `.devcontainer/post-create.sh`:
-
-```bash
-"$HOME/.venvs/hermes/bin/pip" install <package>
-```
 
 ## Secrets
 
