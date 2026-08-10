@@ -1,8 +1,10 @@
 {
   "name": "Universal Standard Template",
   "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
   "postCreateCommand": "chmod +x .devcontainer/post-create.sh && .devcontainer/post-create.sh",
-  "postStartCommand": "chmod +x scripts/start-heartbeat.sh scripts/heartbeat.sh && bash scripts/start-heartbeat.sh &",
   "customizations": {
     "vscode": {
       "extensions": [
