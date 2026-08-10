@@ -1,25 +1,34 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-CONFIG_DIR=".config"
-CONFIG_FILE="$CONFIG_DIR/hermes.yaml"
+# ── System dependencies ──────────────────────────────────────────────
+sudo apt-get update -qq
+sudo apt-get install -y -qq \
+  curl \
+  git \
+  wget \
+  unzip \
+  jq \
+  build-essential \
+  python3 \
+  python3-pip \
+  python3-venv
 
-# Install Hermes Agent (Nous Research)
+# ── Hermes Agent (Nous Research) ─────────────────────────────────────
 if ! command -v hermes >/dev/null 2>&1; then
+  echo "Installing Hermes Agent..."
   curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
 fi
 
-# Scaffold config if not present
-mkdir -p "$CONFIG_DIR"
+# Reload PATH so hermes is immediately available
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 
-if [ ! -f "$CONFIG_FILE" ]; then
-  cat > "$CONFIG_FILE" <<'EOF'
-# Hermes Agent config
-# Run: hermes setup --portal
-# to complete OAuth and model setup
-EOF
-fi
+echo ""
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo " Bootstrap complete."
+echo " Launching Hermes setup..."
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo ""
 
-echo "Bootstrap complete."
-echo "Hermes Agent installed. Run: hermes setup --portal"
-echo "Add Opencode install steps to this script when confirmed."
+# ── Launch Hermes setup ──────────────────────────────────────────────
+hermes setup --portal
